@@ -5,17 +5,17 @@
       <form @submit.prevent="save" class="form">
         <input type="text" v-model="form.title" placeholder="Title" class="input"/><br />
         <textarea v-model="form.content" placeholder="Content" class="textarea"></textarea><br />
-        <button type="submit" class="button save">Save</button>
+        <button @click="save" @touchstart.prevent="save" class="button save">Save</button>
       </form>
       <ul class="article-list">
         <li v-for="article in articles" :key="article.id" class="article-item">
           <strong>{{ article.title }}</strong><br />
           <span>{{ article.content }}</span><br />
-          <button @click="edit(article)" class="button edit">Edit</button>
-          <button @click="deleteArticle(article.id)" class="button delete">Delete</button>
+          <button @click="edit(article)" @touchstart.prevent="edit(article)" class="button edit">Edit</button>
+          <button @click="deleteArticle(article.id)" @touchstart.prevent="deleteArticle(article.id)" class="button delete">Delete</button>
         </li>
       </ul>
-      <button @click="load" class="button load">Load</button>
+      <button @click="load" @touchstart.prevent="load" class="button load">Load</button>
     </div>
   </div>
 </template>
@@ -93,12 +93,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  background-color: #F6FAB9;
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
 .app-background {
   background-color: #8E3E63;
   padding: 20px;
@@ -156,33 +150,13 @@ body {
   background-color: #777777;
 }
 
-.button.edit {
+.button.edit, .button.delete, .button.load {
   background-color: #8E3E63;
   color: white;
 }
 
-.button.edit:hover {
+.button.edit:hover, .button.delete:hover, .button.load:hover {
   background-color: #7d3756;
-}
-
-.button.delete {
-  background-color: #8E3E63;
-  color: white;
-}
-
-.button.delete:hover {
-  background-color: #7d3756;
-}
-
-.button.load {
-  background-color: #888888;
-  color: white;
-  display: block;
-  margin: 20px auto;
-}
-
-.button.load:hover {
-  background-color: #777777;
 }
 
 .article-list {
